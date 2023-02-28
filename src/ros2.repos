@@ -1,0 +1,9 @@
+repositories:
+  isaac_ros_common:
+    type: git
+    url: https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_common.git
+    version: 54a8983264768b595fa1e8b376ef58d122131c9a
+  realsense-ros:
+    type: git
+    url: https://github.com/IntelRealSense/realsense-ros.git
+    version: 2a65533ee7431bdc05fe5744798efc7f5713f866

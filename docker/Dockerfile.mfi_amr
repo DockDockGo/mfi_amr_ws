@@ -1,0 +1,72 @@
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+
+RUN ROS_DISTRO=foxy
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Velodyne deps
+RUN apt-get update \
+    && apt-get -y install --no-install-recommends \
+    libpcl-dev \
+    libpcap-dev \
+    ros-$ROS_DISTRO-velodyne \
+    # Clean up
+    && apt-get autoremove -y \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/*
+
+# Neobotixs Deps
+RUN apt-get update \
+    && apt-get -y install --no-install-recommends \
+#    ros-$ROS_DISTRO-gazebo-ros \
+#    ros-$ROS_DISTRO-gazebo-plugins \
+#    ros-$ROS_DISTRO-gazebo-ros-pkgs \
+#    ros-$ROS_DISTRO-navigation2 \
+#    ros-$ROS_DISTRO-nav2-bringup \
+#    ros-$ROS_DISTRO-slam-toolbox \
+#    xterm \
+    # Clean up
+    && apt-get autoremove -y \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update \
+    && apt-get -y install --no-install-recommends \
+    libpcl-dev \
+    libpcap-dev \
+#    ros-$ROS_DISTRO-gazebo-ros \
+#    ros-$ROS_DISTRO-gazebo-plugins \
+#    ros-$ROS_DISTRO-gazebo-ros-pkgs \
+#    ros-$ROS_DISTRO-navigation2 \
+#    ros-$ROS_DISTRO-nav2-bringup \
+#    ros-$ROS_DISTRO-slam-toolbox \
+#    xterm \
+    # Clean up
+    && apt-get autoremove -y \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/*
+
+# RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
+
+# RUN add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" -u
+
+# RUN apt-get update \
+#     && apt-get -y install --no-install-recommends \
+#     librealsense2-dkms \
+#     librealsense2-utils \
+#     # Clean up
+#     && apt-get autoremove -y \
+#     && apt-get clean -y \
+#     && rm -rf /var/lib/apt/lists/*
+
+# General Dependencies
+RUN apt-get update \
+    && apt-get -y install --no-install-recommends \
+    nano \
+    # Clean up
+    && apt-get autoremove -y \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV DEBIAN_FRONTEND=dialog

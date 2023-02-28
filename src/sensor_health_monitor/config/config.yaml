@@ -1,0 +1,12 @@
+window_period: 2
+sensors:
+  velodyne_vlp16:
+    topics:
+      - name: "velodyne_points"
+        type: "sensor_msgs.msg.PointCloud2"
+        pub_rate: 10
+  realsense_d435i:
+    topics:
+      - name: "camera/color/image_raw"
+        type: "sensor_msgs.msg.Image"
+        pub_rate: 15
