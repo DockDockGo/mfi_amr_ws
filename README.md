@@ -1,4 +1,4 @@
-# MFI AMR Waorkspace Setup and Usage
+# MFI AMR Workspace Setup and Usage
 
 > **Note:** Before you begin, verify that you have sufficient storage space available on your device (At least **30 GB**).
 >
@@ -9,7 +9,7 @@ Follow the instructions in [Jetson Xavier AGX SD card Setup](#jetson-xavier-agx-
 1. Configure `nvidia-container-runtime` as the default runtime for Docker.
 
    Using your text editor of choice, add the following items to `/etc/docker/daemon.json`.
-c
+
     ```json
     {
         ...
