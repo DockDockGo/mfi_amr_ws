@@ -1,9 +1,5 @@
 # Using process similar to MFI_AMR WORKSPACE but building with ROS2 Humble Instead
 
-> **Note:** Before you begin, verify that you have sufficient storage space available on your device (At least **30 GB**).
->
-> On Jetson Xavier platforms, an external drive is **required** to have enough storage space.
-Follow the instructions in [Jetson Xavier AGX SD card Setup](#jetson-xavier-agx-sd-card-setup) to configure the storage
 ## Setup
 
 1. Configure `nvidia-container-runtime` as the default runtime for Docker.
