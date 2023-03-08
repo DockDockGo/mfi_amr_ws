@@ -1,4 +1,4 @@
-# MFI AMR Workspace Setup and Usage
+# Using process similar to MFI_AMR WORKSPACE but building with ROS2 Humble Instead
 
 > **Note:** Before you begin, verify that you have sufficient storage space available on your device (At least **30 GB**).
 >
@@ -53,11 +53,11 @@ Follow the instructions in [Jetson Xavier AGX SD card Setup](#jetson-xavier-agx-
    ```
 5. Clone all required repos using `vcstool`- 
    1. isaac_ros_common
-   2. realsense (4.51.1)
+   <SKIP> 2. realsense (4.51.1)
    ```bash 
    vcs import < ros2.repos
    ```
-
+_________________________________________ SKIP ______________________________________________________________
 7. Clone the `librealsense` repo setup udev rules. Remove any connected relasense cameras when prompted:
    ```bash
     cd /tmp && \
@@ -67,13 +67,14 @@ Follow the instructions in [Jetson Xavier AGX SD card Setup](#jetson-xavier-agx-
     ```bash 
     sudo ./scripts/setup_udev_rules.sh
     ```
+_______________________________________________________________________________________________________________
 
 9. Configure the container created by `isaac_ros_common/scripts/run_dev.sh` to include `librealsense`. Create the `.isaac_ros_common-config` file in the `isaac_ros_common/scripts` directory:
     > **Note:** Remember to replace the **two** instances of <path-to-mfi_amr_ws> with the correct path in the following command.
     ```bash
     cd <path-to-mfi_amr_ws>/src/isaac_ros_common/scripts && \
     touch .isaac_ros_common-config && \
-    echo CONFIG_IMAGE_KEY=foxy.realsense_custom.mfi_amr > .isaac_ros_common-config && \
+    echo CONFIG_IMAGE_KEY=humble.nav2 > .isaac_ros_common-config && \
     echo CONFIG_DOCKER_SEARCH_DIRS="(<path-to-mfi_amr_ws>/docker)" >> .isaac_ros_common-config
     ```
 
@@ -82,7 +83,7 @@ Follow the instructions in [Jetson Xavier AGX SD card Setup](#jetson-xavier-agx-
    
    Edit the `/etc/bash.bashrc` file using `sudo nano /etc/bash.bashrc` and add an entry as follows - .
    ```bash
-   alias ros2_foxy_docker="cd <path-to-mfi_amr_ws>/src/isaac_ros_common && ./scripts/run_dev.sh <path-to-mfi_amr_ws>"
+   alias ros2_humble_docker="cd <path-to-mfi_amr_ws>/src/isaac_ros_common && ./scripts/run_dev.sh <path-to-mfi_amr_ws>"
    ```
    Then, run this command to source the bashrc 
    ```bash
@@ -92,7 +93,7 @@ Follow the instructions in [Jetson Xavier AGX SD card Setup](#jetson-xavier-agx-
 12. Launch the docker container using the `run_dev.sh` script. If you run this command twice then the script will just attach a new shell to the existing container.
 
    ```bash
-   ros2_foxy_docker
+   ros2_humble_docker
    ```
 
 13. Build workspace using `colcon build`
@@ -103,6 +104,9 @@ Follow the instructions in [Jetson Xavier AGX SD card Setup](#jetson-xavier-agx-
    ```bash
    source install/setup.bash
    ```
+   
+   <ADD INSTALLATION FOR NEOBOTIX IF REQUIRED>
+   
 ## Testing Installation
 14. Testing Velodyne VLP16 <br>
 Run the following command in the container -
@@ -113,18 +117,7 @@ Run the following command to check the frequency of the point cloud topic. You s
    ```bash
    ros2 topic hz /velodyne_points
    ```
-15. Testing realsense installation:
-> Note: Plug in your realsense camera before launching the docker container.
-   ```bash
-   ros2 launch realsense2_camera rs_launch.py
-   ```
-Run the following command to check the frequency of the rgb and depth image topic. You should see an average rate greater than 10 if everything goes well.
-   ```bash
-   ros2 topic hz /camera/color/image_raw
-   ```
-   ```bash
-   ros2 topic hz /camera/depth/image_rect_raw
-   ```
+
 ## Jetson Xavier AGX SD card Setup
 To automount the SD card, an entry with a reference to the device path or UUID of the device has to be added in fstab ( File System Table ) file.
 
