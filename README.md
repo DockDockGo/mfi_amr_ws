@@ -54,6 +54,7 @@
    vcs import < ros2.repos
    ```
 _________________________________________ SKIP ______________________________________________________________
+
 7. Clone the `librealsense` repo setup udev rules. Remove any connected relasense cameras when prompted:
    ```bash
     cd /tmp && \
